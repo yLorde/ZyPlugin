@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="ZyPlugin:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/ZyPlugin_jar</output-path>
+    <root id="archive" name="ZyPlugin.jar">
+      <element id="module-output" name="ZyPlugin" />
+    </root>
+  </artifact>
+</component>

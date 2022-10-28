@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="NoteBlockAPI-1.6.1-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../Spigot/NoteBlockAPI-1.6.1-SNAPSHOT.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

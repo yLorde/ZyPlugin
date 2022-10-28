@@ -1,0 +1,228 @@
+options:
+	PluginVersion: 0.1
+
+on join:
+	if {friends.%player%.total} is not set:
+		set {friends.%player%.total} to 0
+	set {friends.status.%player%} to "&aOnline"
+
+on quit:
+	set {friends.status.%player%} to "&cOffline"
+
+on join:
+	loop {friends.list.%player%::*}:
+		send "&6%player% &aEntrou no servidor" to loop-value
+
+command /amigos [<text>] [<text>]:
+	aliases: /amigos, /friend, /amigo, /f, /a
+	trigger:
+
+		if arg 1 is not set:
+			if player has permission "zyplugin.amigos.admin":
+				send "&8&l&m-=------- &f&lAmigos -------=-"
+				send ""
+				send "&a/amigos adicionar [Player]"
+				send "&a/amigos remover [Player]"
+				send "&a/amigos aceitar [Player]"
+				send "&a/amigos recusar [Player]"
+				send "&a/amigos lista"
+				send "&a/amigos pedidos"
+				send ""
+				send "&8&l&m-=------- &f&lAmigos -------=-"
+			else:
+				send "&8&l&m-=------- &f&lAmigos -------=-"
+				send ""
+				send "&a/amigos adicionar [Player]"
+				send "&a/amigos remover [Player]"
+				send "&a/amigos aceitar [Player]"
+				send "&a/amigos recusar [Player]"
+				send "&a/amigos lista"
+				send "&a/amigos pedidos"
+				send ""
+				send "&8&l&m-=------- &f&lAmigos-------=-"
+
+		if arg 1 is "negar" or "deny":
+			if arg 2 is set:
+				if arg 2 is player:
+					send "&cVocê não pode se negar"
+				else:
+					if {%player%.friends.%arg 2%} is not set:
+						if {%arg 2%.friends.request.%player%} is set:
+							clear {%arg 2%.friends.request.%player%}
+							remove arg 2 from {friends.requests.%player%::*}
+							send "&8&l&m-=--------------------------=-"
+							send ""
+							send "&aVocê removeu &6%arg 2% &ados seus amigos!"
+							send ""
+							send "&8&l&m-=--------------------------=-"
+							send "&8&l&m-=--------------------------=-" to arg 2 parsed as offline player
+							send "" to arg 2 parsed as offline player
+							send "&6%player% &cRecusou seu pedido!" to arg 2 parsed as offline player
+							send "" to arg 2 parsed as offline player
+							send "&8&l&m-=--------------------------=-" to arg 2 parsed as offline player
+						else:
+							send "&6%arg 2% &cNão te enviou um pedido"
+					else:
+						send "&cEsse player já é seu amigo"
+			else:
+				send "&cUse: /amigos recusar [Player]"
+		if arg 1 is "aceitar" or "accept":
+			if arg 2 is set:
+				if arg 2 is player:
+					send "&cVocê não pode se aceitar!"
+				else:
+					if {friends.%player%.total} is less than 11:
+						if {%arg 2%.friends.request.%player%} is set:
+							if {%player%.friends.%arg 2%} is not set:
+								add 1 to {friends.%player%.total}
+								add 1 to {friends.%arg 2%.total}
+								set {%player%.friends.%arg 2%} to true
+								set {%arg 2%.friends.%player%} to true
+								add player to {friends.list.%arg 2%::*}
+								add arg 2 to {friends.list.%player%::*}
+								remove arg 2 from {friends.requests.%player%::*}
+								send "&8&l&m-=--------------------------=-"
+								send ""
+								send "&aVocê aceitou o pedido de &6%arg 2%&a!"
+								send ""
+								send "&8&l&m-=--------------------------=-"
+								send "&8&l&m-=--------------------------=-" to arg 2 parsed as offline player
+								send "" to arg 2 parsed as offline player
+								send "&6%player% &aAceitou o seu pedido" to arg 2 parsed as offline player
+								send "" to arg 2 parsed as offline player
+								send "&8&l&m-=--------------------------=-" to arg 2 parsed as offline player
+								play raw sound "random.pop" at player with pitch 1 volume 10
+							else:
+								send "&cEsse player já é seu amigo."
+						else:
+							send "&6%arg 2% &cNão te enviou um pedido."
+					else:
+						send "&aDesculpa, você não pode ter mais de &610 &aamigos."
+			else:
+				send "&cUse: /amigos aceitar [Player]"
+
+		if arg 1 is "remover" or "delete":
+			if arg 2 is set:
+				if arg 2 is player:
+					send "&cVocê não pode se remover"
+				else:
+					if {%player%.friends.%arg 2%} is set:
+						clear {%player%.friends.%arg 2%}
+						clear {%arg 2%.friends.%player%}
+						remove 1 from {friends.%player%.total}
+						remove 1 from {friends.%arg 2%.total}
+						remove arg 2 from {friends.list.%player%::*}
+						remove player from {friends.list.%arg 2%::*}
+						send "&8&l&m-=--------------------------=-"
+						send ""
+						send "&aVocê removeu &6%arg 2% &ados seus amigos"
+						send ""
+						send "&8&l&m-=--------------------------=-"
+					else:
+						send "&cEsse player não é seu amigo"
+			else:
+				send "&cUse: /amigos remover [Player]"
+
+		if arg 1 is "adicionar" or "add":
+			if arg 2 is set:
+				if arg 2 is player:
+					send "&cVocê não pode se adicionar"
+				else:
+					if {friends.%player%.total} is less than 11:
+						if {%player%.friends.request.%arg 2%} is not set:
+							if {%player%.friends.%arg 2%} is not set:
+								set {%player%.friends.request.%arg 2%} to true
+								add player to {friends.requests.%arg 2%::*}
+								set {%player%.friends.request.time.%arg 2%} to 60
+								send "&8&l&m-=--------------------------=-"
+								send ""
+								send "&aVocê recebeu um pedido de amizade de &6%arg 2%"
+								send ""
+								send "&8&l&m-=--------------------------=-"
+								send "&8&l&m-=--------------------------=-" to arg 2 parsed as offline player
+								send "" to arg 2 parsed as offline player
+								send "&6%player% &aTe enviou um pedido de amizade, para aceitar use: &6/amigos pedidos" to arg 2 parsed as offline player
+								send "" to arg 2 parsed as offline player
+								send "&8&l&m-=--------------------------=-" to arg 2 parsed as offline player
+								play raw sound "random.pop" at player with pitch 1 volume 10
+								play raw sound "random.pop" at arg 2 parsed as offline player with pitch 1 volume 10
+								loop 60 times:
+									if {%player%.friends.%arg 2%} is not set:
+										remove 1 from {%player%.friends.request.time.%arg 2%}
+										wait 1 second
+										if {%player%.friends.%arg 2%} is set:
+											stop
+								clear {%player%.friends.request.%arg 2%}
+							else:
+								send "&cEsse player já é seu amigo."
+						else:
+							send "&cVocê deve esperar &6%{%player%.friends.request.time.%arg 2%}% &asegundos para mandar pedido para &6%arg 2% &anovamente!"
+					else:
+						send "&cDesculpa, você não pode adicionar mais de &610 &aamigos."
+			else:
+				send "&cUse: /amigos adicionar [Player]"
+
+		if arg 1 is "lista" or "list":
+			if size of {friends.list.%player%::*} is more than 0:
+				wait 2 ticks
+				play raw sound "note.pling" at player with pitch 1 volume 0.1
+				open chest with 6 rows named "&0Friends List" to player
+				wait 4 tick
+				set {_x} to 0
+				loop {friends.list.%player%::*}:
+					set {_playerhead} to loop-value
+					set {_playerhead} to {_playerhead} parsed as offline player
+					set slot {_x} of player's current inventory to skull of {_playerhead} named "&f&n%loop-value%" with lore "||&7Status: %{friends.status.%loop-value%}%||&7"
+					add 1 to {_x}
+			if size of {friends.list.%player%::*} = 0:
+				wait 2 ticks
+				play raw sound "random.pop" at player with pitch 1 volume 0.1
+				open chest with 6 rows named "&0Friends List" to player
+				wait 4 tick
+				format slot 22 of player with 166 named "&c&lError:" with lore "&cDesculpe mas sua lista de||&cPedidos de amizade||&cestá vazia." to close
+
+		if arg 1 is "pedidos" or "pedido":
+			if size of {friends.requests.%player%::*} is more than 0:
+				wait 2 ticks
+				play raw sound "note.pling" at player with pitch 1 volume 0.1
+				open chest with 6 rows named "&0Requests List" to player
+				wait 4 tick
+				set {_x} to 0
+				loop {friends.requests.%player%::*}:
+					set {_playerhead} to loop-value
+					set {_playerhead} to {_playerhead} parsed as offline player
+					set slot {_x} of player's current inventory to skull of {_playerhead} named "&f&n%loop-value%" with lore "||&7Right click to||&a&lAceitar &7or &c&lNegar||&7Esse pedido de amizade.||||&cAcaba em %{%loop-value%.friends.request.time.%player%}% segundos!"
+					add 1 to {_x}
+			if size of {friends.requests.%player%::*} = 0:
+				wait 2 ticks
+				play raw sound "random.pop" at player with pitch 1 volume 0.1
+				open chest with 6 rows named "&0Lista de Pedidos" to player
+				wait 4 tick
+				format slot 22 of player with 166 named "&c&lError:" with lore "&cDesculpe, mas sua lista de||&cPedidos de amizade||&está vazio." to close
+
+		if arg 1 is "abrir" or "open":
+			if arg 2 is set:
+				if {%arg 2%.friends.request.%player%} is set:
+					wait 2 ticks
+					play raw sound "random.pop" at player with pitch 1 volume 0.1
+					open chest with 5 rows named "&0Pedidos de &6%arg 2%" para player
+					wait 4 tick
+					format slot 13 of player with skull of arg 2 parsed as offline player named "&f&n%arg 2%" to close then run [make player execute command "amigos abrir %arg 2%"]
+					format slot 29 of player with 159:5 named "&a&lAceitar" to close then run [make player execute command "amigos aceitar %arg 2%"]
+					format slot 33 of player with 159:14 named "&a&lNegar" to close then run [make player execute command "amigos recusar %arg 2%"]
+				else:
+					send "&cO player &6%arg 2% &cnão te enviou um pedido."
+			else:
+				send "&cUsa: /amigos abrir [Player]"
+
+on inventory click:
+	if inventory name of player's current inventory is "&0Lista de Amigos":
+		cancel event
+
+on inventory click:
+	if inventory name of player's current inventory is "&0Lista de pedidos":
+		cancel event
+		execute player command "/amigos abrir %uncolored name of clicked item%"
+		close player's inventory
+
+#Code: 221121

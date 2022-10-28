@@ -1,0 +1,105 @@
+name: ZyPlugin
+version: 1.0.0
+main: me.lord.plugin.Main
+author: Lord
+
+depend:
+  - Vault
+  - Skript
+  - NoteBlockAPI
+loadbefore:
+  - Vault
+  - Skript
+  - NoteBlockAPI
+
+commands:
+  itemhead:
+    aliases:
+      - chapeu
+    description: Coloca o item que está na sua mão como capacete
+    permission: zyplugin.itemhead
+    usage: /itemhead
+
+  echest:
+    aliases:
+      - ec
+      - enderchest
+    description: Abre um enderchest virtual
+    permission: zyplugin.echest
+    usage: /echest
+
+  tp:
+    description: Teleporta para um player, mundo, coordenada...
+    permission: zyplugin.tp
+    usage: /tp [player/coord] [player/coord]
+
+  voar:
+    aliases:
+      - fly
+    description: Ativa modo borboleta
+    permission: zyplugin.voar
+    usage: /voar [ativar/desativar] [player]
+
+  clear:
+    description: Limpa o inventário
+    permission: zyplugin.clear
+    usage: /clear [player]
+
+  comer:
+    aliases:
+      - feed
+    description: Regenera sua fome
+    permission: zyplugin.comer
+    usage: /alimentar
+
+  lixeira:
+    aliases:
+      - lixo
+    description: Abre uma lixeira virtual
+    permission: zyplugin.lixeira
+    usage: /lixeira
+
+  reparar:
+    aliases:
+      - repair
+    description: Repara um item na sua mão ou no seu inventário
+    permission: zyplugin.reparar
+    usage: /reparar [tudo/mao]
+
+  nextsong:
+    aliases:
+      - ns
+    description: Pula a música atual X número de vezes
+    permission: zyplugin.nextsong
+    usage: /nextsong <amount to skip>
+
+  reloadsongs:
+    aliases:
+      - rs
+    description: irá recarregar as músicas e reiniciar o player
+    permission: zyplugin.reloadsongs
+
+  playing:
+    aliases:
+      - tocando
+    description: Diz-lhe a música atual que está tocando
+    permission: zyplugin.playing
+
+  setsong:
+    aliases:
+      - ss
+    description: Pular diretamente para uma música
+    usage: /setsong [nome do arquivo de música]
+    permission: zyplugin.setsong
+
+  songs:
+    description: oferece uma lista de músicas carregadas
+    permission: zyplugin.songs
+
+  mboff:
+    description: Pare de ouvir a música
+    permission: zyplugin.mboff
+
+  mbon:
+    description: Comece a ouvir a música
+    permission: zyplugin.mbon

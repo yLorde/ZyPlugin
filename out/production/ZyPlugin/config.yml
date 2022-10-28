@@ -1,0 +1,31 @@
+#############################################
+##              ZyPlugin Config            ##
+##                 By Lord                 ##
+##            Discord Lord#1135            ##
+#############################################
+
+#permissões: zyplugin.[comando]
+
+#Plugin
+name: "&b[ZyDiscord-Link] &7"
+
+#Join
+join-broadcast: false
+join-and-leave-message: false
+enter-message-permission: "zyplugin.join"
+enter-message-content: "&e%player% Entrou no jogo"
+#Nick Placeholder: %player%
+
+#sentar
+sentar-mensagem: "&aVocê está se sentando"
+levantar-mensagem: "&aVocê está se levantando"
+falha-ao-sentar: "&cVocê não pode sentar-se no ar!"
+
+#amigos
+files:
+  save:
+    files: 1
+    1:
+      name: Friends.sk
+      local: true
+      url: false
