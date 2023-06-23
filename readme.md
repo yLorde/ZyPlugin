@@ -6,18 +6,18 @@
 
 <h2>Funções:</h2>
 <p>
-- Comandos:
-  -/clear
-  -/comer
-  -/echest
-  -/itemhead
-  -/lixeira
-  -/reparar
-  -/tp
-  /-voar
+- Comandos:<br>
+  -/clear<br>
+  -/comer<br>
+  -/echest<br>
+  -/itemhead<br>
+  -/lixeira<br>
+  -/reparar<br>
+  -/tp<br>
+  -/voar<br>
 
-- Músicas
-- PlaceHolder (Hologramas)
+- Músicas<br>
+- PlaceHolder (Hologramas)<br>
 </p>
 
 <h2>Sobre ele:</h2>
