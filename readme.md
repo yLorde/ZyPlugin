@@ -9,7 +9,7 @@
 <p>
 - Comandos:<br>
   
-/clear<br>
+/clear - Limpa o inventário do <br>
 /comer<br>
 /echest<br>
 /itemhead<br>
