@@ -7,14 +7,15 @@
 <h2>Funções:</h2>
 <p>
 - Comandos:<br>
-  -/clear<br>
-  -/comer<br>
-  -/echest<br>
-  -/itemhead<br>
-  -/lixeira<br>
-  -/reparar<br>
-  -/tp<br>
-  -/voar<br>
+  
+/clear<br>
+/comer<br>
+/echest<br>
+/itemhead<br>
+/lixeira<br>
+/reparar<br>
+/tp<br>
+/voar<br>
 
 - Músicas<br>
 - PlaceHolder (Hologramas)<br>
